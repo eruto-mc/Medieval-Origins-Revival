@@ -33,3 +33,7 @@ bin/
 run/
 
 logs
+
+# ⚠ 当部が置いた「届かない maven の代わり」（2026-09-02）
+# ⚠⚠ **他人の jar なので追跡しない。** 作り方は common/build.gradle の注記。
+libs-local/

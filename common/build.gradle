@@ -9,10 +9,35 @@ archivesBaseName = "${mod_name}"
 version = "${rootProject.version}+${minecraft_version}-common"
 
 repositories {
+    // ⚠⚠ **当部の追加（2026-09-02）。上の Greenhouse がここから届かないため。**
+    //
+    // ⚠ 実測: `maven.greenhouse.lgbt`（Greenhouse の実体）は名前解決は通るが
+    //   ⚠ **TCP が 25 秒で時間切れ**（IPv4 を強制しても同じ）。`./gradlew projects` が
+    //   ⚠ `Could not resolve com.github.apace100:origins-fabric:v1.10.0` で落ちた。
+    //
+    // ⚠ そこで**同じ座標で引ける置き場を手元に作った**（`libs-local/m2`）。
+    //   ⚠ 中身は Modrinth の `Origins-1.20.1-1.10.0.jar` と、
+    //   ⚠ **その入れ子から取り出した** `apoli-v2.9.0` / `calio-v1.11.0`。
+    //
+    // ⚠⚠ **`libs-local/` は git で追跡しない**（他人の jar を配ることになる）。
+    // ⚠ `metadataSources { artifact() }` は「POM が無くても jar だけで解決する」指定。
+    //   ⚠ 元の宣言は全部 `{ transitive false }` なので、POM の情報は要らない。
+    // ⚠ `exclusiveContent` にはしない。⚠⚠ **group を「ここだけ」に縛ると、
+    //   ⚠ ビルドの道具が作る派生の名前（`…_mapped_parchment_…`）まで締め出す**
+    //   （`forge/build.gradle` の注記に、14 分建てた後で落ちた実例）。
+    // ⚠ **Greenhouse は下で止めてある**ので、先に並べるだけでよい。
     maven {
-        name = "Greenhouse"
-        url = 'https://maven.greenhouseteam.dev/releases/'
+        name = "LocalFallback"
+        url = file("${rootDir}/libs-local/m2").toURI()
+        metadataSources { artifact() }
     }
+    // ⚠ 当部が止めた（2026-09-02）。⚠ ここから届かず、⚠⚠ **1本の時間切れで repo ごと
+    //   無効になって、無関係な依存まで巻き込む**（`forge/build.gradle` の注記に実例）。
+    // ⚠ **上流へ戻すときはこの行を戻す。**
+    // maven {
+    //     name = "Greenhouse"
+    //     url = 'https://maven.greenhouseteam.dev/releases/'
+    // }
     maven {
         name = 'Sponge / Mixin'
         url = 'https://repo.spongepowered.org/repository/maven-public/'
@@ -47,7 +72,16 @@ dependencies {
     modCompileOnly("com.github.apace100:calio:${calio_fabric_version}") { transitive false }
     modCompileOnly("com.github.apace100:apoli:${apoli_fabric_version}") { transitive false }
     modCompileOnly("com.github.apace100:origins-fabric:${origins_fabric_version}") { transitive false }
-    modCompileOnly("net.merchantpug:Apugli:${apugli_version}+${minecraft_version}-fabric") { transitive false }
+    // ⚠⚠ **当部が外した（2026-09-02）。`common` は Apugli を1行も使っていない。**
+    //
+    // ⚠ 数えた: `common/` の中で `apugli` に触れるのは **data の JSON 8 件と、この
+    //   ⚠ `build.gradle` 自身だけ**。⚠ **Java・mixin の設定・accesswidener には 0 件。**
+    // ⚠ つまり**建てるのに要らない**（動かすときに Apugli が居ればよい）。
+    //
+    // ⚠ 外した理由は「不要だから」ではなく、⚠⚠ **取りに行く先が届かないから**——
+    //   `net.merchantpug` も Greenhouse に在り、`common` の解決を止めていた。
+    // ⚠ **上流へ戻すときはこの行を戻す**（上流の環境では届く）。
+    // modCompileOnly("net.merchantpug:Apugli:${apugli_version}+${minecraft_version}-fabric") { transitive false }
     compileOnly(annotationProcessor("io.github.llamalad7:mixinextras-common:${mixin_extras_version}"))
     compileOnly group:'org.spongepowered', name:'mixin', version:'0.8.5'
     compileOnly group: 'org.ow2.asm', name: 'asm-tree', version: '9.4'

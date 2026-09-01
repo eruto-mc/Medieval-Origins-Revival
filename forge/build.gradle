@@ -28,10 +28,53 @@ version = "${rootProject.version}+${minecraft_version}-forge"
 jarJar.enable()
 
 repositories {
+    // ⚠⚠ **当部の追加（2026-09-02）。下の Greenhouse がここから届かないため。**
+    //
+    // ⚠ 実測: `repo.greenhouse.house` は `maven.greenhouse.lgbt` へ向いており、
+    //   ⚠ **TCP が時間切れ**（IPv4 を強制しても同じ）。`:forge:build` が
+    //   ⚠ `Could not resolve io.github.edwinmindcraft:calio-forge:1.20.1-1.11.0.5` で落ち、
+    //   ⚠⚠ **その失敗で Greenhouse ごと無効になり、`cpw.mods:bootstraplauncher` まで巻き込まれた。**
+    //
+    // ⚠ 置いてあるのは**当部が既に配っている実物**（推測で版を合わせていない）:
+    //     calio-forge 1.20.1-1.11.0.5 ／ apoli-forge 1.20.1-2.9.0.8
+    //     origins-forge 1.20.1-1.10.0.9 ／ Apugli 2.10.2+1.20.1-forge
+    //     Pehkui 3.8.2-1.20.1-forge ／ additionalentityattributes-forge 1.4.0.5+1.20.1
+    //
+    // ⚠⚠ **`libs-local/` は git で追跡しない**（他人の jar を配ることになる）。
+    //
+    // ⚠⚠ **`exclusiveContent` にしてはいけない（2026-09-02 に踏んだ）**:
+    //   ⚠ 一度 `exclusiveContent { filter { includeGroup "io.github.edwinmindcraft" } }`
+    //   ⚠ と書いたら、⚠⚠ **14 分建てた後にこう落ちた**——
+    //
+    //     Could not find io.github.edwinmindcraft:apoli-forge:
+    //       1.20.1-2.9.0.8_mapped_parchment_2023.08.20-1.20.1
+    //
+    //   ⚠ `fg.deobf` は**難読化を解いた jar を `_mapped_parchment_…` という別名で
+    //   ⚠ ForgeGradle 自身の置き場へ作る**。⚠⚠ **group を「ここだけ」に縛ると、
+    //   ⚠ その置き場まで締め出す。**
+    // ⇒ ⚠ 普通の置き場として**先に並べる**だけにする。
+    //   ⚠ **Greenhouse は下で止めてある**ので、時間切れに巻き込まれることはもう無い。
     maven {
-        name = "Greenhouse"
-        url = 'https://repo.greenhouse.house/releases'
+        name = "LocalFallback"
+        url = file("${rootDir}/libs-local/m2").toURI()
+        metadataSources { artifact() }
     }
+    // ⚠⚠ **当部が止めた（2026-09-02）。ここから届かないため。**
+    //
+    // ⚠ `repo.greenhouse.house` は `maven.greenhouse.lgbt`（18.204.152.241）へ向いており、
+    //   ⚠ **TCP が 25 秒で時間切れ**（IPv4 を強制しても同じ）。
+    // ⚠⚠ **置いたままだと、1本の時間切れで repo ごと無効になり、
+    //   ⚠ 無関係な依存（`cpw.mods:bootstraplauncher`）まで巻き込んで build が落ちる。**
+    //
+    // ⚠ ここに在った物は、それぞれ**本来の置き場**から取れる:
+    //     `top.theillusivec4:*` → `maven.theillusivec4.top`（⚠ http=200 で確認）
+    //     `io.github.edwinmindcraft:*` ほか → 上の `LocalFallback`
+    // ⚠ **上流へ戻すときはこの行を戻す**（上流の環境では届く）。
+    //
+    // maven {
+    //     name = "Greenhouse"
+    //     url = 'https://repo.greenhouse.house/releases'
+    // }
 
     maven {
         name = "JitPack"
@@ -63,7 +106,8 @@ repositories {
     maven {
         url = "https://jm.gserv.me/repository/maven-public/"
     }
-    maven { url = 'https://maven.greenhouseteam.dev/releases/' }
+    // ⚠ 当部が止めた（2026-09-02）。⚠ 上の Greenhouse と同じ実体で、届かない。
+    // maven { url = 'https://maven.greenhouseteam.dev/releases/' }
     maven { url = 'https://maven.theillusivec4.top' }
     maven { url = "https://modmaven.dev"
         content {
