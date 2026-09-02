@@ -9,29 +9,29 @@
 				"inverted": true
 			},
 			{
-		"type": "origins:equipped_item",
-		"equipment_slot": "mainhand",
-		"item_condition": {
-			"type": "origins:or",
-			"conditions": [
-				{
-					"type": "origins:and",
+				"type": "origins:equipped_item",
+				"equipment_slot": "mainhand",
+				"item_condition": {
+					"type": "origins:or",
 					"conditions": [
 						{
-							"type": "origins:ingredient",
-							"ingredient": {
-								"tag": "medievalorigins:zombie_flesh"
-							}
-						},
-						{
-							"type": "origins:amount",
-							"compare_to": 4,
-							"comparison": ">="
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:ingredient",
+									"ingredient": {
+										"tag": "medievalorigins:zombie_flesh"
+									}
+								},
+								{
+									"type": "origins:amount",
+									"compare_to": 4,
+									"comparison": ">="
+								}
+							]
 						}
 					]
 				}
-			]
-		}
 			}
 		]
 	},
@@ -90,7 +90,6 @@
 										"power": "medievalorigins:revenant/unwitherable",
 										"source": "medievalorigins:revenant/summons"
 									}
-									
 								]
 							}
 						},
@@ -277,6 +276,13 @@
 												"value": -10
 											}
 										}
+									},
+									{
+										"type": "origins:target_action",
+										"action": {
+											"type": "medievalorigins:modify_duration",
+											"make_permanent": true
+										}
 									}
 								]
 							},
@@ -311,6 +317,13 @@
 												"operation": "add_base_early",
 												"value": -5
 											}
+										}
+									},
+									{
+										"type": "origins:target_action",
+										"action": {
+											"type": "medievalorigins:modify_duration",
+											"multiplier": 2.0
 										}
 									}
 								]

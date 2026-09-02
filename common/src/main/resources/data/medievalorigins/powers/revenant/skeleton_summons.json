@@ -359,6 +359,13 @@
 												"value": -25
 											}
 										}
+									},
+									{
+										"type": "origins:target_action",
+										"action": {
+											"type": "medievalorigins:modify_duration",
+											"make_permanent": true
+										}
 									}
 								]
 							},
@@ -393,6 +400,13 @@
 												"operation": "add_base_early",
 												"value": -20
 											}
+										}
+									},
+									{
+										"type": "origins:target_action",
+										"action": {
+											"type": "medievalorigins:modify_duration",
+											"multiplier": 2.0
 										}
 									}
 								]
