@@ -1,7 +1,5 @@
 {
 	"type": "origins:multiple",
-	"name": "従者への指示",
-	"description": "しゃがんで押すたびに、従者へ「その場で待つ」「ついて来る」「呼び寄せる」を順に伝える。",
 	"state": {
 		"type": "origins:resource",
 		"start_value": 0,

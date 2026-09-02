@@ -457,13 +457,16 @@
   "power.medievalorigins.revenant/hellraiser.description": "At will, a revenant can raise a circle of inert skeletons, acting as a temporary shield to protect them from danger and damage nearby enemies.",
 
   "power.medievalorigins.revenant/putrid_communion.name": "Putrid Communion",
-  "power.medievalorigins.revenant/putrid_communion.description": "Through the unsettling act of consuming the flesh or bones of the undead, a revenant can empower their next summon of the same type.",
+  "power.medievalorigins.revenant/putrid_communion.description": "Through the unsettling act of consuming the flesh or bones of the undead, a revenant can empower their next summon of the same type. \nAt 5 or more, that summon lasts twice as long. At 10 or more, it no longer expires.",
 
   "power.medievalorigins.revenant/unwitherable.name": "Necrotic Curse",
   "power.medievalorigins.revenant/unwitherable.description": "Revenants are immune to wither, and, like undead, they take extra damage from smite, receive inverted effects from harming and healing effects, and are immune to poison and regeneration effects.",
 
+  "power.medievalorigins.revenant/command_summons.name": "Command Summons",
+  "power.medievalorigins.revenant/command_summons.description": "Sneak and press to cycle your summons through stay, follow and come.",
+
   "power.medievalorigins.revenant/skeleton_summons.name": "Revenance",
-  "power.medievalorigins.revenant/skeleton_summons.description": "Revenants can reconstruct creatures of the night modified to do their own bidding. These act as pets, will follow and teleport, and skeletons can be equipped with any weapon. Strength of non-mounts scales with Soul/Blood Spell Power. Summon by activating while holding: \n§lSkeleton:§r \n- Mainhand: 4 bones\n§lSkeleton Horse:§r\n- Mainhand: 12 bones\n- Offhand: 1 saddle \n§lWither Skeleton:§r \n- Mainhand: 12 bones\n- Offhand: 1 wither skull\n§lZombie:§r \n- Mainhand: 4 flesh\n§lZombie Horse:§r \n- Mainhand: 12 flesh\n- Offhand: 1 saddle",
+  "power.medievalorigins.revenant/skeleton_summons.description": "Revenants can reconstruct creatures of the night modified to do their own bidding. These act as pets, will follow and teleport, and skeletons can be equipped with any weapon. Strength of non-mounts scales with Soul/Blood Spell Power. \nSummons last 10 minutes, and you may keep 5 at once. Calling a sixth sends one home, and you are told which one left. \nSneak and press the same key to cycle them through stay, follow and come. \nSummon by activating while holding: \n§lSkeleton:§r \n- Mainhand: 4 bones\n§lSkeleton Horse:§r\n- Mainhand: 12 bones\n- Offhand: 1 saddle \n§lWither Skeleton:§r \n- Mainhand: 12 bones\n- Offhand: 1 wither skull\n§lZombie:§r \n- Mainhand: 4 flesh\n§lZombie Horse:§r \n- Mainhand: 12 flesh\n- Offhand: 1 saddle",
 
   "power.medievalorigins.revenant/poor_reputation.name": "Chaotic Ally",
   "power.medievalorigins.revenant/poor_reputation.description": "Villagers will refuse to trade with revenants and iron golems will attack them on sight. However, they are accepted amongst the ranks of the Pillagers.",
@@ -516,11 +519,10 @@
   "entity.medievalorigins.summon_skeleton": "Summoner's Skeleton",
   "entity.medievalorigins.summon_wither_skeleton": "Summoner's Wither Skeleton",
 
-  "badges.medievalorigins.pixie.jump": "Pixie jumps are 2 blocks high. They can also fly, which uses up §bFlight Power (FP)§r. \n\n §bFP§r only regenerates while on the ground.",
+  "badges.medievalorigins.pixie.jump": "Pixie jumps are 2 blocks high. They can also fly, which uses up §bFlight Power (FP)§r. \n\n §bFP§r regenerates while on the ground. Glow berries restore 10 §bFP§r, dragon breath restores 150 §bFP§r (the cap). \n\n Once the Ender Dragon is slain, §bFP§r regenerates while flying too.",
   "badges.medievalorigins.pixie.glide": "Glide - Press %s in the air to glide gently using your wings. \n\nUses no §bFP§r.",
   "badges.medievalorigins.pixie.hover": "Hover - Quickly press %s twice to begin hovering (a slower creative flight) and slowly drain §bFP§r. \n\nIf your §bFP§r runs out completely, you'll stop hovering.",
   "badges.medievalorigins.pixie.dash_forward": "Dash - Press %s twice quickly to dash forward. \n\nThis uses 50 §bFP§r if gliding, and 25 §bFP§r otherwise.",
-  "badges.medievalorigins.pixie.dash_upward": "Dash Up - Quickly press %s then %s to dash upward. \n\nThis also uses 50 §bFP§r if gliding, and 25 §bFP§r otherwise.",
   "badges.medievalorigins.pixie.disable_effects": "Press %s while sneaking to disable sounds and particle effects",
 
   "badges.medievalorigins.high_elf.glacial_step": "§bGlacial Step:§r Hold an ice block to manipulate the entropy of water molecules, allowing you to walk as if you had Frost Walker",

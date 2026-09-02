@@ -433,13 +433,16 @@
 "power.medievalorigins.revenant/hellraiser.description": "リベナントは意志で不活性なスケルトンの円を呼び出し、一時的な盾として敵を攻撃から守ります。",
 
 "power.medievalorigins.revenant/putrid_communion.name": "腐敗の共鳴",
-"power.medievalorigins.revenant/putrid_communion.description": "アンデッドの肉や骨を食べることで、次に同種を召喚した際に強化できます。",
+"power.medievalorigins.revenant/putrid_communion.description": "アンデッドの肉や骨を食べることで、次に同種を召喚した際に強化できます。\n5以上たまっていれば、その召喚は寿命が2倍になります。10以上なら消えなくなります。",
 
 "power.medievalorigins.revenant/unwitherable.name": "死の呪い",
 "power.medievalorigins.revenant/unwitherable.description": "リベナントはウィザーに耐性があり、アンデッド同様、スマイトで追加ダメージを受け、回復や治癒効果が逆転し、毒や再生効果も無効です。",
 
+"power.medievalorigins.revenant/command_summons.name": "従者への指示",
+"power.medievalorigins.revenant/command_summons.description": "しゃがみながら押すたびに、従者へ「その場で待つ」「ついて来る」「呼び寄せる」を順に伝えます。",
+
 "power.medievalorigins.revenant/skeleton_summons.name": "復讐の召喚",
-"power.medievalorigins.revenant/skeleton_summons.description": "リベナントは夜の生き物を再構成し、従者として使役できます。これらはペットのように従い、スケルトンには武器を装備可能。非騎乗型の強さはソウル/ブラッド魔力に依存。\n召喚方法：\n§lスケルトン:§r \n- メインハンド: 骨4本\n§lスケルトンホース:§r\n- メインハンド: 骨12本\n- オフハンド: 鞍1つ\n§lウィザースケルトン:§r \n- メインハンド: 骨12本\n- オフハンド: ウィザースカル1つ\n§lゾンビ:§r \n- メインハンド: 腐肉4つ\n§lゾンビホース:§r \n- メインハンド: 腐肉12個\n- オフハンド: 鞍1つ",
+"power.medievalorigins.revenant/skeleton_summons.description": "リベナントは夜の生き物を再構成し、従者として使役できます。これらはペットのように従い、スケルトンには武器を装備可能。非騎乗型の強さはソウル/ブラッド魔力に依存。\n従者は10分で消え、同時に5体までです。6体目を呼ぶと1体が帰り、どれが帰ったかを画面下に出します。\nしゃがみながら同じキーを押すと、待機・追従・呼び寄せを順に指示できます。\n召喚方法：\n§lスケルトン:§r \n- メインハンド: 骨4本\n§lスケルトンホース:§r\n- メインハンド: 骨12本\n- オフハンド: 鞍1つ\n§lウィザースケルトン:§r \n- メインハンド: 骨12本\n- オフハンド: ウィザースカル1つ\n§lゾンビ:§r \n- メインハンド: 腐肉4つ\n§lゾンビホース:§r \n- メインハンド: 腐肉12個\n- オフハンド: 鞍1つ",
 
 "power.medievalorigins.revenant/poor_reputation.name": "混沌の仲間",
 "power.medievalorigins.revenant/poor_reputation.description": "村人はリベナントと取引せず、アイアンゴーレムは見つけ次第攻撃しますが、略奪者には受け入れられます。",
@@ -486,11 +489,10 @@
 "entity.medievalorigins.summon_skeleton": "召喚者のスケルトン",
 "entity.medievalorigins.summon_wither_skeleton": "召喚者のウィザースケルトン",
 
-"badges.medievalorigins.pixie.jump": "ピクシーのジャンプは2ブロック分の高さです。また、§b飛行力(FP)§rを消費して飛行も可能です。\n\n§bFP§rは地上にいるときのみ回復します。",
+"badges.medievalorigins.pixie.jump": "ピクシーのジャンプは2ブロック分の高さです。また、§b飛行力(FP)§rを消費して飛行も可能です。\n\n§bFP§rは地上にいるときに回復します。グロウベリーを食べると+10、ドラゴンブレスを飲むと+150（上限150）。\n\nエンダードラゴンを倒すと、飛んでいる間も回復するようになります。",
 "badges.medievalorigins.pixie.glide": "滑空 - 空中で%sを押すと、翼でゆっくり滑空できます。\n\n§bFP§rは消費しません。",
 "badges.medievalorigins.pixie.hover": "ホバリング - %sを素早く2回押すと、ゆっくりとしたクリエイティブ飛行のようにホバリングし、§bFP§rを徐々に消費します。\n\n§bFP§rが完全に切れるとホバリングは終了します。",
 "badges.medievalorigins.pixie.dash_forward": "前方ダッシュ - %sを素早く2回押すと前方にダッシュします。\n\n滑空中は§bFP§rを50消費し、それ以外は25消費します。",
-"badges.medievalorigins.pixie.dash_upward": "上昇ダッシュ - %sを素早く押した後、%sを押すと上方にダッシュします。\n\n滑空中は§bFP§rを50消費し、それ以外は25消費します。",
 "badges.medievalorigins.pixie.disable_effects": "しゃがみながら%sを押すと、音やパーティクル効果を無効化できます。",
 
 "badges.medievalorigins.high_elf.glacial_step": "§b氷雪の歩み:§r 氷ブロックを持つことで水分子のエントロピーを操作し、フロストウォーカーのように歩けます。",
