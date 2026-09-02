@@ -258,6 +258,10 @@ public class SummonedWitherSkeleton extends WitherSkeleton implements IFollowing
     public void setIsLimitedLife(boolean bool) {
         this.isLimitedLifespan = bool;
     }
+    @Override
+    public boolean isLimitedLife() {
+        return this.isLimitedLifespan;
+    }
 
     public LivingEntity getOwnerFromID() {
         try {

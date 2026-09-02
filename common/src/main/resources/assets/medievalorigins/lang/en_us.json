@@ -543,6 +543,7 @@
   "medievalorigins.troublemaker": "Villagers don't trade with the likes of you!",
   "medievalorigins.uncastable": "You can't use this ability right now.",
 
+  "message.medievalorigins.summon_limit_reached": "Too many summons. Dismissed:",
   "message.medievalorigins.summon.sit": "Summons will stay",
   "message.medievalorigins.summon.follow": "Summons will follow",
   "message.medievalorigins.summon.come": "Summons teleported to you",

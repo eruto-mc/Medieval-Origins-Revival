@@ -22,6 +22,14 @@ public interface ISummon extends OwnableEntity {
     }
     void setLifeTicks(int lifeTicks);
     void setIsLimitedLife(boolean bool);
+
+    /**
+     * Whether this summon expires on its own.
+     *
+     * <p>Used when the summon cap is reached: a summon that was going to expire anyway is
+     * dismissed before a permanent one.
+     */
+    boolean isLimitedLife();
     void setWeapon(ItemStack item);
     void setOwner(LivingEntity owner);
     void setOwnerID(UUID uuid);

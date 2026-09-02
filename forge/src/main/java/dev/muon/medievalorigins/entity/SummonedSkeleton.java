@@ -267,6 +267,10 @@ public class SummonedSkeleton extends Skeleton implements IFollowingSummon, ISum
     public void setIsLimitedLife(boolean bool) {
         this.isLimitedLifespan = bool;
     }
+    @Override
+    public boolean isLimitedLife() {
+        return this.isLimitedLifespan;
+    }
 
     public LivingEntity getOwnerFromID() {
         try {

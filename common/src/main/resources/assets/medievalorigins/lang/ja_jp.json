@@ -513,6 +513,7 @@
 "medievalorigins.troublemaker": "村人はあなたのような厄介者とは取引しません！",
 "medievalorigins.uncastable": "今はこの能力を使えません。",
 
+"message.medievalorigins.summon_limit_reached": "従者が多すぎる。離れたのは",
 "message.medievalorigins.summon.sit": "従者は その場で待つ",
 "message.medievalorigins.summon.follow": "従者は ついて来る",
 "message.medievalorigins.summon.come": "従者を 呼び寄せた",
