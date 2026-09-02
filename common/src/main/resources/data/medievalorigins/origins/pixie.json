@@ -8,7 +8,8 @@
 		"medievalorigins:pixie/mount",
 		"medievalorigins:pixie/good_fortunes",
 		"medievalorigins:pixie/mischief_maketh_man",
-		"medievalorigins:pixie/troublemaker"
+		"medievalorigins:pixie/troublemaker",
+		"medievalorigins:pixie/food_restore"
 	],
 	"icon": {
 		"item": "minecraft:ink_sac",

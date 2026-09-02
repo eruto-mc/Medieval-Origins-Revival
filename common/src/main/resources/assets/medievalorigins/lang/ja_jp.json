@@ -513,6 +513,7 @@
 "medievalorigins.troublemaker": "村人はあなたのような厄介者とは取引しません！",
 "medievalorigins.uncastable": "今はこの能力を使えません。",
 
+"tooltip.medievalorigins.when_consumed": "食べると：",
 "tooltip.medievalorigins.set_bonus": "セットボーナス：",
 "tooltip.medievalorigins.water_protection": "水耐性",
 "tooltip.medievalorigins.looting_bonus": "モブのドロップ増加の可能性",

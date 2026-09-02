@@ -14,6 +14,7 @@ public class ModActions {
     public static final RegistryObject<CastSpellAction> CAST_SPELL = ModList.get().isLoaded("irons_spellbooks") ?
             ENTITY_ACTIONS.register("cast_spell", CastSpellAction::new) : null;
     public static final RegistryObject<ClearNegativeEffectsAction> CLEAR_NEGATIVE_EFFECTS = ENTITY_ACTIONS.register("clear_negative_effects", ClearNegativeEffectsAction::new);
+    public static final RegistryObject<ModifyDurationAction> MODIFY_DURATION = ENTITY_ACTIONS.register("modify_duration", ModifyDurationAction::new);
 
     public static final DeferredRegister<BiEntityAction<?>> BIENTITY_ACTIONS = DeferredRegister.create(ApoliRegistries.BIENTITY_ACTION_KEY, MedievalOrigins.MODID);
     public static final RegistryObject<AttributedDamageAction> DAMAGE = BIENTITY_ACTIONS.register("damage", AttributedDamageAction::new);

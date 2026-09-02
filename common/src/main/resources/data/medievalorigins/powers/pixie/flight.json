@@ -50,21 +50,6 @@
 			"type": "origins:tooltip",
 			"sprite": "medievalorigins:textures/gui/pixie_badge.png",
 			"text": {
-				"translate": "badges.medievalorigins.pixie.dash_upward",
-				"with": [
-					{
-						"keybind": "key.sprint"
-					},
-					{
-						"keybind": "key.jump"
-					}
-				]
-			}
-		},
-		{
-			"type": "origins:tooltip",
-			"sprite": "medievalorigins:textures/gui/pixie_badge.png",
-			"text": {
 				"translate": "badges.medievalorigins.pixie.disable_effects",
 				"with": [
 					{
@@ -132,7 +117,7 @@
 		"type": "origins:resource",
 		"min": 0,
 		"start_value": 100,
-		"max": 100,
+		"max": 150,
 		"hud_render": {
 			"should_render": true,
 			"sprite_location": "origins:textures/gui/community/huang/resource_bar_01.png",
@@ -140,7 +125,7 @@
 			"condition": {
 				"type": "origins:resource",
 				"resource": "*:*_flight_resource",
-				"compare_to": 100,
+				"compare_to": 150,
 				"comparison": "<"
 			}
 		}
@@ -192,6 +177,22 @@
 					"type": "medievalorigins:creative_mode"
 				}
 			]
+		},
+		"entity_action": {
+			"type": "origins:modify_resource",
+			"modifier": {
+				"operation": "add_base_early",
+				"value": 1
+			},
+			"resource": "*:*_flight_resource"
+		}
+	},
+	"restore_resource_upg": {
+		"type": "origins:action_over_time",
+		"interval": 10,
+		"condition": {
+			"type": "origins:advancement",
+			"advancement": "minecraft:end/kill_dragon"
 		},
 		"entity_action": {
 			"type": "origins:modify_resource",
@@ -607,142 +608,6 @@
 		},
 		"key": {
 			"key": "key.sprint"
-		}
-	},
-	"dash_upward": {
-		"type": "origins:active_self",
-		"condition": {
-			"type": "origins:and",
-			"conditions": [
-				{
-					"type": "origins:resource",
-					"resource": "medievalorigins:pixie/flight_doubletap",
-					"comparison": ">",
-					"compare_to": 0
-				},
-				{
-					"type": "origins:or",
-					"conditions": [
-						{
-							"type": "origins:and",
-							"conditions": [
-								{
-									"type": "origins:fall_flying",
-									"inverted": true
-								},
-								{
-									"type": "origins:resource",
-									"resource": "*:*_flight_resource",
-									"comparison": ">=",
-									"compare_to": 25
-								}
-							]
-						},
-						{
-							"type": "origins:resource",
-							"resource": "*:*_flight_resource",
-							"comparison": ">=",
-							"compare_to": 50
-						}
-					]
-				}
-			]
-		},
-		"entity_action": {
-			"type": "origins:and",
-			"actions": [
-				{
-					"type": "origins:if_else",
-					"condition": {
-						"type": "origins:fall_flying"
-					},
-					"if_action": {
-						"type": "origins:add_velocity",
-						"space": "local_horizontal_normalized",
-						"y": 1.8,
-						"set": true
-					},
-					"else_action": {
-						"type": "origins:delay",
-						"ticks": 1,
-						"action": {
-							"type": "origins:add_velocity",
-							"space": "local_horizontal_normalized",
-							"y": 2.1,
-							"set": true
-						}
-					}
-				},
-				{
-					"type": "origins:modify_resource",
-					"resource": "medievalorigins:pixie/flight_doubletap",
-					"modifier": {
-						"operation": "set_total",
-						"value": 0
-					}
-				},
-				{
-					"type": "origins:if_else",
-					"condition": {
-						"type": "origins:fall_flying"
-					},
-					"if_action": {
-						"type": "origins:modify_resource",
-						"resource": "*:*_flight_resource",
-						"modifier": {
-							"operation": "addition",
-							"value": -50
-						}
-					},
-					"else_action": {
-						"type": "origins:modify_resource",
-						"resource": "*:*_flight_resource",
-						"modifier": {
-							"operation": "addition",
-							"value": -25
-						}
-					}
-				},
-				{
-					"type": "origins:if_else",
-					"condition": {
-						"type": "origins:resource",
-						"resource": "medievalorigins:pixie/flight_effects_toggle",
-						"compare_to": 1,
-						"comparison": "=="
-					},
-					"if_action": {
-						"type": "origins:and",
-						"actions": [
-							{
-								"type": "origins:execute_command",
-								"command": "playsound medievalorigins:dash player @a ~ ~ ~ 0.65 0.8"
-							},
-							{
-								"type": "origins:execute_command",
-								"command": "playsound medievalorigins:boost player @a ~ ~ ~ 0.18 1"
-							},
-							{
-								"type": "origins:grant_power",
-								"power": "medievalorigins:pixie/temp_dashup_particles",
-								"source": "medievalorigins:pixie/flight"
-							},
-							{
-								"type": "origins:grant_power",
-								"power": "medievalorigins:pixie/temp_dashup_particles_limit",
-								"source": "medievalorigins:pixie/flight"
-							}
-						]
-					},
-					"else_action": {
-						"type": "origins:execute_command",
-						"command": "playsound medievalorigins:dash player @a ~ ~ ~ 0.65 0.8"
-					}
-				}
-			]
-		},
-		"key": {
-			"key": "key.jump"
 		}
 	},
 	"jump_effects": {

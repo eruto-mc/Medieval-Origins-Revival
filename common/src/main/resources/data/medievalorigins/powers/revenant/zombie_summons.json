@@ -109,6 +109,7 @@
 						{
 							"type": "medievalorigins:summon_entity",
 							"entity_type": "medievalorigins:summon_zombie",
+							"duration": 12000,
 							"tag": "{Tags: [\"necro_summon_temp\"]}",
 							"entity_action": {
 								"type": "origins:and",

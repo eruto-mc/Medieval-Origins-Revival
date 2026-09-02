@@ -144,6 +144,7 @@
 							{
 								"type": "medievalorigins:summon_entity",
 								"entity_type": "medievalorigins:summon_wither_skeleton",
+								"duration": 12000,
 								"tag": "{Tags: [\"necro_summon_temp\"]}",
 								"entity_action": {
 									"type": "origins:and",
@@ -189,6 +190,7 @@
 							{
 								"type": "medievalorigins:summon_entity",
 								"entity_type": "medievalorigins:summon_skeleton",
+								"duration": 12000,
 								"tag": "{Tags: [\"necro_summon_temp\"]}",
 								"entity_action": {
 									"type": "origins:and",

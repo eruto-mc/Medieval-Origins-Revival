@@ -543,6 +543,7 @@
   "medievalorigins.troublemaker": "Villagers don't trade with the likes of you!",
   "medievalorigins.uncastable": "You can't use this ability right now.",
 
+  "tooltip.medievalorigins.when_consumed": "When consumed:",
   "tooltip.medievalorigins.set_bonus": "Set Bonus:",
   "tooltip.medievalorigins.water_protection": "Water Protection",
   "tooltip.medievalorigins.looting_bonus": "Chance to increase mob loot",
