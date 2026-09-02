@@ -1,29 +1,38 @@
 {
 	"type": "origins:active_self",
 	"condition": {
-		"type": "origins:equipped_item",
-		"equipment_slot": "mainhand",
-		"item_condition": {
-			"type": "origins:or",
-			"conditions": [
-				{
-					"type": "origins:and",
+		"type": "origins:and",
+		"conditions": [
+			{
+				"type": "origins:sneaking",
+				"inverted": true
+			},
+			{
+				"type": "origins:equipped_item",
+				"equipment_slot": "mainhand",
+				"item_condition": {
+					"type": "origins:or",
 					"conditions": [
 						{
-							"type": "origins:ingredient",
-							"ingredient": {
-								"item": "minecraft:bone"
-							}
-						},
-						{
-							"type": "origins:amount",
-							"compare_to": 4,
-							"comparison": ">="
+							"type": "origins:and",
+							"conditions": [
+								{
+									"type": "origins:ingredient",
+									"ingredient": {
+										"item": "minecraft:bone"
+									}
+								},
+								{
+									"type": "origins:amount",
+									"compare_to": 4,
+									"comparison": ">="
+								}
+							]
 						}
 					]
 				}
-			]
-		}
+			}
+		]
 	},
 	"entity_action": {
 		"type": "origins:and",

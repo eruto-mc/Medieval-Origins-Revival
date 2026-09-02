@@ -63,6 +63,8 @@ public class SummonedWitherSkeleton extends WitherSkeleton implements IFollowing
     @Nullable
     private BlockPos boundOrigin;
     private boolean isLimitedLifespan;
+    /* Sit / follow, back-ported from the 6.7.x line. See ISummon and FollowSummonerGoal. */
+    private boolean orderedToSit;
     private int limitedLifeTicks;
 
     @Override
@@ -208,6 +210,7 @@ public class SummonedWitherSkeleton extends WitherSkeleton implements IFollowing
             compound.putInt("BoundZ", this.boundOrigin.getZ());
         }
         compound.putBoolean("isLimited", this.isLimitedLifespan);
+        compound.putBoolean("OrderedToSit", this.orderedToSit);
         if (this.isLimitedLifespan) {
             compound.putInt("LifeTicks", this.limitedLifeTicks);
         }
@@ -220,6 +223,9 @@ public class SummonedWitherSkeleton extends WitherSkeleton implements IFollowing
         super.readAdditionalSaveData(compound);
         if (compound.contains("BoundX")) {
             this.boundOrigin = new BlockPos(compound.getInt("BoundX"), compound.getInt("BoundY"), compound.getInt("BoundZ"));
+        }
+        if (compound.contains("OrderedToSit")) {
+            this.orderedToSit = compound.getBoolean("OrderedToSit");
         }
         if (compound.contains("isLimited")) {
             this.isLimitedLifespan = compound.getBoolean("isLimited");
@@ -239,6 +245,14 @@ public class SummonedWitherSkeleton extends WitherSkeleton implements IFollowing
     @Override
     public int getTicksLeft() {
         return limitedLifeTicks;
+    }
+    @Override
+    public void setOrderedToSit(boolean sit) {
+        this.orderedToSit = sit;
+    }
+    @Override
+    public boolean isOrderedToSit() {
+        return this.orderedToSit;
     }
     @Override
     public void setIsLimitedLife(boolean bool) {

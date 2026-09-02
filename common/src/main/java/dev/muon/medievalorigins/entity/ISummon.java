@@ -3,6 +3,7 @@ package dev.muon.medievalorigins.entity;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.OwnableEntity;
 import net.minecraft.world.item.ItemStack;
 
@@ -25,6 +26,22 @@ public interface ISummon extends OwnableEntity {
     void setOwner(LivingEntity owner);
     void setOwnerID(UUID uuid);
     void reassessWeaponGoal();
+
+    /*
+     * Sit / follow, back-ported from the 6.7.x line.
+     *
+     * FollowSummonerGoal already had a "don't follow while sitting" branch, but it asked
+     * TamableAnimal — and none of these summons are tameable, so the branch never fired.
+     * Upstream moved the question onto ISummon; this does the same.
+     */
+    void setOrderedToSit(boolean sit);
+
+    boolean isOrderedToSit();
+
+    /** The summon as a Mob, for navigation and teleport. Null if it somehow isn't one. */
+    default Mob getSelfAsMob() {
+        return this instanceof Mob ? (Mob) this : null;
+    }
 
     @Nullable
     default UUID getOwnerUUID(){

@@ -2,6 +2,13 @@
 	"type": "origins:active_self",
 	"hidden": true,
 	"condition": {
+		"type": "origins:and",
+		"conditions": [
+			{
+				"type": "origins:sneaking",
+				"inverted": true
+			},
+			{
 		"type": "origins:equipped_item",
 		"equipment_slot": "mainhand",
 		"item_condition": {
@@ -25,6 +32,8 @@
 				}
 			]
 		}
+			}
+		]
 	},
 	"entity_action": {
 		"type": "origins:and",

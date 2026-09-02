@@ -1,10 +1,12 @@
 package dev.muon.medievalorigins.entity.goal;
 
 import dev.muon.medievalorigins.entity.IFollowingSummon;
+// Sit is asked of ISummon, not TamableAnimal: these summons are zombies and skeletons,
+// so the old TamableAnimal branch could never fire. Back-ported from the 6.7.x line.
+import dev.muon.medievalorigins.entity.ISummon;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.TamableAnimal;
 import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.entity.ai.navigation.FlyingPathNavigation;
 import net.minecraft.world.entity.ai.navigation.GroundPathNavigation;
@@ -53,7 +55,7 @@ public class FollowSummonerGoal extends Goal {
             return false;
         } else if (livingentity instanceof Player && livingentity.isSpectator()) {
             return false;
-        } else if (this.summon instanceof TamableAnimal && ((TamableAnimal) this.summon).isOrderedToSit()) {
+        } else if (this.summon instanceof ISummon && ((ISummon) this.summon).isOrderedToSit()) {
             return false;
         } else
             return !(this.summon.getSelfEntity().distanceToSqr(livingentity) < (double) (this.minDist * this.minDist));
@@ -65,8 +67,8 @@ public class FollowSummonerGoal extends Goal {
     public boolean canContinueToUse() {
 
         boolean flag = true;
-        if (this.summon instanceof TamableAnimal)
-            flag = !((TamableAnimal) this.summon).isOrderedToSit();
+        if (this.summon instanceof ISummon)
+            flag = !((ISummon) this.summon).isOrderedToSit();
 
         if (this.summon.getSummoner() == null)
             return false;
@@ -104,7 +106,7 @@ public class FollowSummonerGoal extends Goal {
             return;
         }
         this.summon.getSelfEntity().getLookControl().setLookAt(this.summon.getSummoner(), 10.0F, (float) this.summon.getSelfEntity().getMaxHeadXRot());
-        if (this.summon instanceof TamableAnimal && ((TamableAnimal) this.summon).isOrderedToSit())
+        if (this.summon instanceof ISummon && ((ISummon) this.summon).isOrderedToSit())
             return;
 
         if (--this.timeToRecalcPath <= 0) {

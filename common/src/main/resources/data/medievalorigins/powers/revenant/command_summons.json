@@ -1,0 +1,96 @@
+{
+	"type": "origins:multiple",
+	"name": "従者への指示",
+	"description": "しゃがんで押すたびに、従者へ「その場で待つ」「ついて来る」「呼び寄せる」を順に伝える。",
+	"state": {
+		"type": "origins:resource",
+		"start_value": 0,
+		"min": 0,
+		"max": 2
+	},
+	"command": {
+		"type": "origins:active_self",
+		"key": {
+			"key": "key.origins.primary_active",
+			"continuous": false
+		},
+		"condition": {
+			"type": "origins:sneaking"
+		},
+		"cooldown": 10,
+		"entity_action": {
+			"type": "origins:if_else_list",
+			"actions": [
+				{
+					"condition": {
+						"type": "origins:resource",
+						"resource": "*:*_state",
+						"comparison": "==",
+						"compare_to": 0
+					},
+					"action": {
+						"type": "origins:and",
+						"actions": [
+							{
+								"type": "origins:change_resource",
+								"resource": "*:*_state",
+								"change": 1,
+								"operation": "set"
+							},
+							{
+								"type": "medievalorigins:command_summons",
+								"command": "sit"
+							}
+						]
+					}
+				},
+				{
+					"condition": {
+						"type": "origins:resource",
+						"resource": "*:*_state",
+						"comparison": "==",
+						"compare_to": 1
+					},
+					"action": {
+						"type": "origins:and",
+						"actions": [
+							{
+								"type": "origins:change_resource",
+								"resource": "*:*_state",
+								"change": 2,
+								"operation": "set"
+							},
+							{
+								"type": "medievalorigins:command_summons",
+								"command": "follow"
+							}
+						]
+					}
+				},
+				{
+					"condition": {
+						"type": "origins:resource",
+						"resource": "*:*_state",
+						"comparison": "==",
+						"compare_to": 2
+					},
+					"action": {
+						"type": "origins:and",
+						"actions": [
+							{
+								"type": "origins:change_resource",
+								"resource": "*:*_state",
+								"change": 0,
+								"operation": "set"
+							},
+							{
+								"type": "medievalorigins:command_summons",
+								"command": "come"
+							}
+						]
+					}
+				}
+			]
+		}
+	}
+}
