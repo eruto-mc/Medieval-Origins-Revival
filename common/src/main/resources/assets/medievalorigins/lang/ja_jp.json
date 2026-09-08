@@ -492,7 +492,6 @@
 "badges.medievalorigins.pixie.jump": "ピクシーのジャンプは2ブロック分の高さです。また、§b飛行力(FP)§rを消費して飛行も可能です。\n\n§bFP§rは地上にいるときに回復します。グロウベリーを食べると+10、ドラゴンブレスを飲むと+150（上限150）。\n\nエンダードラゴンを倒すと、飛んでいる間も回復するようになります。",
 "badges.medievalorigins.pixie.glide": "滑空 - 空中で%sを押すと、翼でゆっくり滑空できます。\n\n§bFP§rは消費しません。",
 "badges.medievalorigins.pixie.hover": "ホバリング - %sを素早く2回押すと、ゆっくりとしたクリエイティブ飛行のようにホバリングし、§bFP§rを徐々に消費します。\n\n§bFP§rが完全に切れるとホバリングは終了します。",
-"badges.medievalorigins.pixie.dash_forward": "前方ダッシュ - %sを素早く2回押すと前方にダッシュします。\n\n滑空中は§bFP§rを50消費し、それ以外は20消費します。",
 "badges.medievalorigins.pixie.disable_effects": "しゃがみながら%sを押すと、音やパーティクル効果を無効化できます。",
 
 "badges.medievalorigins.high_elf.glacial_step": "§b氷雪の歩み:§r 氷ブロックを持つことで水分子のエントロピーを操作し、フロストウォーカーのように歩けます。",
