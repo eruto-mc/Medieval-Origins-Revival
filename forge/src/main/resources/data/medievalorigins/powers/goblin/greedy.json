@@ -160,39 +160,6 @@
 			]
 		}
 	},
-	"golden_tool_boosts": {
-		"type": "origins:conditioned_attribute",
-		"modifiers": [
-			{
-				"attribute": "reach-entity-attributes:reach",
-				"operation": "addition",
-				"value": 1.0
-			},
-			{
-				"attribute": "additionalentityattributes:generic.dig_speed",
-				"operation": "addition",
-				"value": 1.0
-			}
-		],
-		"condition": {
-			"type": "origins:equipped_item",
-			"equipment_slot": "mainhand",
-			"item_condition": {
-				"type": "origins:or",
-				"conditions": [
-					{
-						"type": "apoli:ingredient",
-						"ingredient": {
-							"tag": "medievalorigins:golden_tools"
-						}
-					},
-					{
-						"type": "medievalorigins:is_golden_tool"
-					}
-				]
-			}
-		}
-	},
 	"golden_tool_harvest_boosts": {
 		"type": "origins:modify_harvest",
 		"block_condition": {
