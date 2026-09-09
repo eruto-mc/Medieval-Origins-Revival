@@ -7,12 +7,7 @@
         "medievalorigins:troll/apex_predator",
         "medievalorigins:troll/lumbering",
         "medievalorigins:troll/old_blood",
-        "medievalorigins:troll/out_of_stock",
-        "medievalorigins:troll/spell_power",
-        "origins_env_deh:cold_resistance",
-        "thermoo-patches:cold_immune",
-        "origins_survive:cold_resistance",
-        "origins_toughasnails:cold_resistance"
+        "medievalorigins:troll/out_of_stock"
     ],
     "icon": {
         "item": "minecraft:player_head",

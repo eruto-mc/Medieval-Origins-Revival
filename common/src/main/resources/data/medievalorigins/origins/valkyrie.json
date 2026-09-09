@@ -5,8 +5,7 @@
 		"medievalorigins:valkyrie/corruption",
 		"medievalorigins:valkyrie/vanquisher",
 		"medievalorigins:valkyrie/intervention",
-		"medievalorigins:valkyrie/heavenly_implements",
-		"medievalorigins:valkyrie/spell_power"
+		"medievalorigins:valkyrie/heavenly_implements"
 	],
 	"icon": {
 		"item": "minecraft:ink_sac",

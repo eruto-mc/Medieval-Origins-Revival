@@ -8,8 +8,7 @@
                 "medievalorigins:banshee/hexed",
                 "medievalorigins:banshee/immaterial",
                 "medievalorigins:banshee/cursed_sigil",
-                "medievalorigins:banshee/cursed_ward",
-                "origins_survive:sleepless"
+                "medievalorigins:banshee/cursed_ward"
 	],
         "icon": {
                 "item": "minecraft:ink_sac",
