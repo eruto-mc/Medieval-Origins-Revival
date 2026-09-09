@@ -329,7 +329,7 @@
   "entity.medievalorigins.summon_zombie": "召喚者のゾンビ",
   "entity.medievalorigins.summon_skeleton": "召喚者のスケルトン",
   "entity.medievalorigins.summon_wither_skeleton": "召喚者のウィザースケルトン",
-  "badges.medievalorigins.pixie.jump": "ピクシーのジャンプは2ブロック分の高さです。また、§b飛行力(FP)§rを消費して飛行も可能です。\n\n§bFP§rは地上にいるときに回復します。グロウベリーを食べると+10、ドラゴンブレスを飲むと+150（上限150）。\n\nエンダードラゴンを倒すと、飛んでいる間も回復するようになります。",
+  "badges.medievalorigins.pixie.jump": "ピクシーのジャンプは2ブロック分の高さです。また、§bゲージ§rを減らして飛ぶこともできます。\n\n§bゲージ§rは地上にいると戻ります。グロウベリーを食べると+10、ドラゴンブレスを飲むと+150（上限150）。\n\nエンダードラゴンを倒すと、飛んでいる間も回復するようになります。",
   "badges.medievalorigins.pixie.glide": "滑空 - 空中で%sを押すと、翼でゆっくり滑空できます。\n\n§bFP§rは消費しません。",
   "badges.medievalorigins.pixie.hover": "ホバリング - %sを素早く2回押すと、ゆっくりとしたクリエイティブ飛行のようにホバリングし、§bFP§rを徐々に消費します。\n\n§bFP§rが完全に切れるとホバリングは終了します。",
   "badges.medievalorigins.pixie.disable_effects": "しゃがみながら%sを押すと、音やパーティクル効果を無効化できます。",
