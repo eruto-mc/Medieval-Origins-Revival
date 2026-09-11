@@ -48,7 +48,12 @@ public class IcarusHelperMixin {
 
                 @Override
                 public float exhaustionAmount() {
-                    return original.exhaustionAmount()/4;
+                    // 当部（world-3・2026-09-12）: 上流は /4 していた。
+                    // ⚠ 種族の翼を持つ人が唯一 W で推進する側なのに、設定値の 1/4 しか引かれず、
+                    //   ⚠⚠ 設定 1.0 のつもりが実際は 0.25/tick（満タンから約 32 秒）だった。
+                    // ⚠ 割るのをやめ、icarus.jsonc の exhaustion_amount がそのまま意味を持つようにした。
+                    //   → 数字の調整は jar を建て直さずに設定でできる（サーバ側の値だけが使われる）。
+                    return original.exhaustionAmount();
                 }
 
                 @Override

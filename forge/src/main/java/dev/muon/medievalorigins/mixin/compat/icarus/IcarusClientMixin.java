@@ -12,6 +12,7 @@ import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
+import net.minecraft.world.phys.Vec3;
 import org.objectweb.asm.Opcodes;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -22,26 +23,77 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(value = IcarusClient.class, remap = false)
 public class IcarusClientMixin {
 
-    /*
-     * 当部（world-3・2026-09-12）: 背中の枠に着ける「品の翼」は、W を押しても前へ進まない
-     * ＝エリトラと同じにする。種族の翼（medievalorigins:icarus_wings の power）は素通しなので据え置き。
+    /**
+     * W を押しているあいだの推進を、当部の計算へ丸ごと置き換える（world-3・2026-09-12）。
      *
-     * ⚠ IcarusConfig の wings_speed を 0 にしても止まらない。下の modifyArmorModifier が
-     *   onPlayerTick の最初の float 変数（＝wings_speed × 向きの倍率）を
-     *   「max(1.0, 防具値/20 × maxSlowed)」で丸ごと置き換えるため、wings_speed は捨てられる。
-     *   置き換わった値が 1.0 だと計算が「速度 = 視線 × 2.5」に畳まれ、
-     *   ⚠⚠ W を押した瞬間に 2.5 ブロック/tick（50 m/s）へ張り付く。
+     * ⚠ なぜ差し替えるのか（設定では届かない）:
+     *   下の modifyArmorModifier が onPlayerTick の最初の float 変数（＝wings_speed × 向きの倍率）を
+     *   「max(1.0, 防具値/20 × maxSlowed)」で置き換えるので、⚠⚠ wings_speed は読まれた直後に捨てられる。
+     *   置き換わる値は 1.0 を下回らず、Icarus の式が「速度 = 視線 × 2.5 ブロック/tick」に畳まれる。
+     *   ⚠⚠ つまり W を押した瞬間に 50 m/s へ張り付き、しかも縦には上限が無い（当部の
+     *   elytra_boost_limit は水平しか削らない）ので、真上を向くと 50 m/s で登れてしまっていた。
      *
-     * ⚠ だから入口で打ち切る。onPlayerTick がするのは推進と ApplyBoostPacket の送信だけなので、
-     *   打ち切ると腹の減りも一緒に止まる（描画は getWingsForRendering が別に持っている）。
+     * 当部の計算（視線の向きの TARGET へ、毎tick RATE ぶん寄せる）:
+     *
+     *     速度 ← 速度 + (視線 × TARGET − 速度) × RATE
+     *
+     *   TARGET = 0.75 ブロック/tick（15 m/s）＝ elytra_boost_limit の水平上限と同じ。
+     *   ⚠ どの向きを見ても 15 m/s を超えない（縦も同じ）ので、「上下に振れば速い」は
+     *     エリトラと同じく重力と滑空に任せる（当部のエリトラの設計どおり）。
+     *   RATE  = IcarusConfig の wings_speed。⚠ **本来の意味（寄る速さ）に読み直して使っている。**
+     *     サーバ→クライアントへ同期される値なので、⚠ **jar を建て直さずに設定で調整できる。**
+     *
+     * ⚠ 種族の翼を持たない人（＝背中に品の翼を着けているだけの人）は推進なし＝エリトラと同じ。
+     * ⚠ 腹の減りは ApplyBoostPacket がサーバ側で引く（値は exhaustion_amount。IcarusHelperMixin を参照）。
      */
     @Inject(method = "onPlayerTick(Lnet/minecraft/world/entity/player/Player;)V",
             at = @At("HEAD"), cancellable = true)
-    private static void world3$noBoostForItemWings(Player player, CallbackInfo ci) {
+    private static void world3$wingBoostBefore(Player player, CallbackInfo ci) {
+        world3$beforeBoost = null;
         if (!IcarusWingsPower.hasPower(player)) {
-            ci.cancel();
+            ci.cancel();  // 品の翼は推進しない（腹も減らない＝包みも送られない）
+            return;
+        }
+        if (player.isFallFlying() && player.zza > 0.0F) {
+            if (player.getDeltaMovement().length() >= WORLD3_TARGET_SPEED) {
+                // ⚠ すでに目標より速い（急降下の途中など）ときは何もしない。
+                //   ⚠⚠ ここで寄せるとブレーキになるうえ、腹だけ減る。包みごと止める。
+                ci.cancel();
+                return;
+            }
+            // ⚠ Icarus 本体はそのまま走らせる（腹を引く包みを送るのはあちら。
+            //    ⚠⚠ 包みのクラスはこの fork が組むときの Icarus（2.9.0）と実機（2.14.0）で
+            //    場所が違うので、こちらから名指しで呼ばない）。速度だけ後から書き換える。
+            world3$beforeBoost = player.getDeltaMovement();
         }
     }
+
+    @Inject(method = "onPlayerTick(Lnet/minecraft/world/entity/player/Player;)V",
+            at = @At("RETURN"))
+    private static void world3$wingBoostAfter(Player player, CallbackInfo ci) {
+        Vec3 before = world3$beforeBoost;
+        world3$beforeBoost = null;
+        if (before == null) return;
+
+        float rate = IcarusHelper.getConfigValues(player).wingsSpeed();
+        if (rate <= 0.0F) {
+            player.setDeltaMovement(before);  // 0 なら推進なしに戻す
+            return;
+        }
+        if (rate > 1.0F) rate = 1.0F;
+
+        Vec3 target = player.getLookAngle().scale(WORLD3_TARGET_SPEED);
+        player.setDeltaMovement(before.add(target.subtract(before).scale(rate)));
+    }
+
+    /** 当部: W で出せる速さの頭打ち（ブロック/tick）。0.75 ＝ 15 m/s ＝ エリトラの水平上限と同じ。 */
+    private static final double WORLD3_TARGET_SPEED = 0.75D;
+
+    /**
+     * 押す前の速度の控え。⚠ クライアント側の自分1人ぶんしか通らない（`IcarusClient` は
+     * 自分のプレイヤーにしか呼ばれず、どちらの inject も同じ tick の中で対になる）。
+     */
+    private static Vec3 world3$beforeBoost = null;
 
     /*
      * TODO: Rewrite to be less invasive
