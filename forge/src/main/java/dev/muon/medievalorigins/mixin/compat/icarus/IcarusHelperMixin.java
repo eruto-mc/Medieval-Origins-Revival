@@ -67,7 +67,57 @@ public class IcarusHelperMixin {
                 }
             };
         }
-        return original;
+        // 当部（world-3・2026-09-12）: 背中の枠に着ける「品の翼」だけ、エリトラと同じ飛び方にする。
+        // 種族の翼（上の分岐）は 1 つも触っていないので、ヴァルキリーは据え置きのまま。
+        // ⚠ wingsSpeed を 0 にするだけでは足りない——Icarus は W を押しているあいだ
+        //    速度に関係なく ApplyBoostPacket を送り、サーバが exhaustionAmount を引く。
+        //    進まないのに腹だけ減るので、exhaustionAmount も 0 にする。
+        return new IcarusPlayerValues() {
+            @Override
+            public float wingsSpeed() {
+                return 0;
+            }
+
+            @Override
+            public float maxSlowedMultiplier() {
+                return original.maxSlowedMultiplier();
+            }
+
+            @Override
+            public boolean armorSlows() {
+                return original.armorSlows();
+            }
+
+            @Override
+            public boolean canLoopDeLoop() {
+                return original.canLoopDeLoop();
+            }
+
+            @Override
+            public boolean canSlowFall() {
+                return original.canSlowFall();
+            }
+
+            @Override
+            public float exhaustionAmount() {
+                return 0;
+            }
+
+            @Override
+            public int maxHeightAboveWorld() {
+                return original.maxHeightAboveWorld();
+            }
+
+            @Override
+            public boolean maxHeightEnabled() {
+                return original.maxHeightEnabled();
+            }
+
+            @Override
+            public float requiredFoodAmount() {
+                return 0;
+            }
+        };
     }
 
     @WrapOperation(method = "hasWings", at = @At(value = "INVOKE", target = "Ljava/util/function/Predicate;test(Ljava/lang/Object;)Z"))
