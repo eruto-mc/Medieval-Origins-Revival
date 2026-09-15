@@ -86,8 +86,20 @@ public class IcarusClientMixin {
         player.setDeltaMovement(before.add(target.subtract(before).scale(rate)));
     }
 
-    /** 当部: W で出せる速さの頭打ち（ブロック/tick）。0.75 ＝ 15 m/s ＝ エリトラの水平上限と同じ。 */
-    private static final double WORLD3_TARGET_SPEED = 0.75D;
+    /**
+     * 当部: W で寄せていく先の速さ（ブロック/tick）。
+     *
+     * ⚠⚠ **0.75（＝水平上限と同じ）にしたら上昇できなくなった**（2026-09-12・あなたの「上にいかなすぎ」）。
+     *   重力は毎tick 約 0.08 を下向きに足すので、真上を向いたときの釣り合いは
+     *
+     *       v = (0.98 × 寄る速さ × TARGET − 0.08) ÷ (0.02 + 0.98 × 寄る速さ)
+     *
+     *   TARGET 0.75・寄る速さ 0.05 では **−0.63**（＝登るどころか沈む）。
+     * ⚠ 1.2 と寄る速さ 0.2 で **約 +0.72 ブロック/tick（14 m/s）の上昇**になる。
+     * ⚠ **水平は elytra_boost_limit が 0.75／1.5 で削る**ので、ここを上げても横には速くならない
+     *   （＝「エリトラの滑空としての速さは elytra_nerf に従う」を保ったまま、縦だけ動かせる）。
+     */
+    private static final double WORLD3_TARGET_SPEED = 1.2D;
 
     /**
      * 押す前の速度の控え。⚠ クライアント側の自分1人ぶんしか通らない（`IcarusClient` は
