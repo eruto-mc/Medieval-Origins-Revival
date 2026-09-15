@@ -19,6 +19,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import top.theillusivec4.curios.api.CuriosApi;
 
 @Mixin(value = IcarusClient.class, remap = false)
 public class IcarusClientMixin {
@@ -138,7 +139,28 @@ public class IcarusClientMixin {
             }
         } else if (PixieWingsPower.hasPower(entity)) {
             return new ItemStack(Items.AIR);
+        } else if (world3$inHiddenSlot(entity, original)) {
+            return ItemStack.EMPTY;
         }
         return original;
+    }
+
+    /**
+     * 当部（world-3・2026-09-16）: Curios の「表示の切り替え」で消した枠の翼を描かない。
+     *
+     * ⚠ Icarus 2.14.0 は背中の枠の翼を `findFirstCurio` で取り、枠の表示の設定
+     *   （`SlotContext.visible()`）を1度も見ない。⚠ だから切り替えを押しても翼が出たままだった。
+     *   上流は Issue #131（未解決）。Elytra Slot と当部の金の腕輪は見ている。
+     *
+     * ⚠ 見分けは「描こうとしている品が、枠に入っている現物そのものか」（`==`）。
+     *   Icarus は枠の現物をそのまま返す（`SlotResult.stack()`）ので当たり、
+     *   ⚠ 種族の翼は上の分岐が作った別の品なので当たらない＝ヴァルキリーの翼は巻き込まない。
+     *   ⚠ Icarus が将来写しを返すようになったら当たらなくなり、翼が出たままに戻るだけ（落ちない）。
+     */
+    private static boolean world3$inHiddenSlot(LivingEntity entity, ItemStack wings) {
+        return CuriosApi.getCuriosInventory(entity).resolve()
+                .map(inventory -> inventory.findCurios(stack -> stack == wings).stream()
+                        .anyMatch(result -> !result.slotContext().visible()))
+                .orElse(false);
     }
 }
