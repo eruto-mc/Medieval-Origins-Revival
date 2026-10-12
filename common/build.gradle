@@ -23,7 +23,7 @@ repositories {
     // ⚠ `metadataSources { artifact() }` は「POM が無くても jar だけで解決する」指定。
     //   ⚠ 元の宣言は全部 `{ transitive false }` なので、POM の情報は要らない。
     // ⚠ `exclusiveContent` にはしない。⚠⚠ **group を「ここだけ」に縛ると、
-    //   ⚠ ビルドの道具が作る派生の名前（`…_mapped_parchment_…`）まで締め出す**
+    //   ⚠ ビルドツールが作る派生の名前（`…_mapped_parchment_…`）まで締め出す**
     //   （`forge/build.gradle` の注記に、14 分建てた後で落ちた実例）。
     // ⚠ **Greenhouse は下で止めてある**ので、先に並べるだけでよい。
     maven {

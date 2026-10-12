@@ -155,7 +155,7 @@ public class IcarusClientMixin {
      * ⚠ 見分けは「描こうとしている品が、枠に入っている現物そのものか」（`==`）。
      *   Icarus は枠の現物をそのまま返す（`SlotResult.stack()`）ので当たり、
      *   ⚠ 種族の翼は上の分岐が作った別の品なので当たらない＝ヴァルキリーの翼は巻き込まない。
-     *   ⚠ Icarus が将来写しを返すようになったら当たらなくなり、翼が出たままに戻るだけ（落ちない）。
+     *   ⚠ Icarus が将来コピーを返すようになったら当たらなくなり、翼が出たままに戻るだけ（落ちない）。
      */
     private static boolean world3$inHiddenSlot(LivingEntity entity, ItemStack wings) {
         return CuriosApi.getCuriosInventory(entity).resolve()
