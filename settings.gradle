@@ -31,7 +31,7 @@ rootProject.name = 'Medieval-Origins-Revival'
 // ⚠ 1本ずつ向け直すと次が出るので、**建てる対象から外した**。
 // ⚠ 当部が配るのは Forge だけなので、失うものは無い。
 //
-// ⚠ **上流へ戻すときは fabric を戻す**（上流の環境では届く）。
+// ⚠ **本家へ戻すときは fabric を戻す**（本家の環境では届く）。
 //   ⚠ 同じ相手を止めた注記が `forge/build.gradle` と `common/build.gradle` に
 //   2026-09-02 から在る。
 include("common", "forge")

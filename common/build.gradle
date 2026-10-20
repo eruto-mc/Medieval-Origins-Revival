@@ -33,7 +33,7 @@ repositories {
     }
     // ⚠ 当部が止めた（2026-09-02）。⚠ ここから届かず、⚠⚠ **1本の時間切れで repo ごと
     //   無効になって、無関係な依存まで巻き込む**（`forge/build.gradle` の注記に実例）。
-    // ⚠ **上流へ戻すときはこの行を戻す。**
+    // ⚠ **本家へ戻すときはこの行を戻す。**
     // maven {
     //     name = "Greenhouse"
     //     url = 'https://maven.greenhouseteam.dev/releases/'
@@ -80,7 +80,7 @@ dependencies {
     //
     // ⚠ 外した理由は「不要だから」ではなく、⚠⚠ **取りに行く先が届かないから**——
     //   `net.merchantpug` も Greenhouse に在り、`common` の解決を止めていた。
-    // ⚠ **上流へ戻すときはこの行を戻す**（上流の環境では届く）。
+    // ⚠ **本家へ戻すときはこの行を戻す**（本家の環境では届く）。
     // modCompileOnly("net.merchantpug:Apugli:${apugli_version}+${minecraft_version}-fabric") { transitive false }
     compileOnly(annotationProcessor("io.github.llamalad7:mixinextras-common:${mixin_extras_version}"))
     compileOnly group:'org.spongepowered', name:'mixin', version:'0.8.5'

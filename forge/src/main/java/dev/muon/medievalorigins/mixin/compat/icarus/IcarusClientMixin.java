@@ -150,7 +150,7 @@ public class IcarusClientMixin {
      *
      * ⚠ Icarus 2.14.0 は背中の枠の翼を `findFirstCurio` で取り、枠の表示の設定
      *   （`SlotContext.visible()`）を1度も見ない。⚠ だから切り替えを押しても翼が出たままだった。
-     *   上流は Issue #131（未解決）。Elytra Slot と当部の金の腕輪は見ている。
+     *   作者の置き場では Issue #131（未解決）。Elytra Slot と当部の金の腕輪は見ている。
      *
      * ⚠ 見分けは「描こうとしている品が、枠に入っている現物そのものか」（`==`）。
      *   Icarus は枠の現物をそのまま返す（`SlotResult.stack()`）ので当たり、

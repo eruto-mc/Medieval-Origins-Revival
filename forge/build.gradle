@@ -69,7 +69,7 @@ repositories {
     // ⚠ ここに在った物は、それぞれ**本来の置き場**から取れる:
     //     `top.theillusivec4:*` → `maven.theillusivec4.top`（⚠ http=200 で確認）
     //     `io.github.edwinmindcraft:*` ほか → 上の `LocalFallback`
-    // ⚠ **上流へ戻すときはこの行を戻す**（上流の環境では届く）。
+    // ⚠ **本家へ戻すときはこの行を戻す**（本家の環境では届く）。
     //
     // maven {
     //     name = "Greenhouse"
